@@ -1,0 +1,31 @@
+{% extends "students/base.html" %}
+
+{% block body %}
+  <h3 class="text-center m-4">Edit Course</h3>
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <div class="card bg-light mb-3">
+        <div class="card-header">
+          <i class="fa-solid fa-pen-to-square fa-lg"></i> Edit Course
+        </div>
+        <div class="card-body">
+          {% if success %}
+            <div class="alert alert-success" role="alert">
+              Changes saved successfully.
+              <a href="{% url 'view_course' course.id %}" class="alert-link">View Updated Course</a>
+              or
+              <a href="{% url 'course_index' %}" class="alert-link">Go to Courses Page.</a>
+            </div>
+          {% endif %}
+          <form action="{% url 'edit_course' course.id %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a href="{% url 'course_index' %}" class="btn btn-secondary">Cancel</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
